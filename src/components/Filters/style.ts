@@ -40,4 +40,19 @@ margin-top: 10px;
             border: 1px solid black;
         }
     }
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        padding: 0 7%;
+        justify-content: space-between;
+
+        .selectsFilter {
+            flex-direction: row;
+            max-width: 400px;
+        }
+
+        form {
+            max-width: 400px;
+        }
+    }
 `

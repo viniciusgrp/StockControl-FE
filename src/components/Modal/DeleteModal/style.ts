@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 export const ModalContent = styled.div`
+max-width: 300px;
     width: 50%;
     background-color: white;
     padding: 10px 3%;

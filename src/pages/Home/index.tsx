@@ -18,11 +18,15 @@ export const Home = () => {
     console.log(filters)
   },[filters])
 
-  const dispatch = useDispatch();
 
   const getProducts = async () => {
     try {
-      const { data } = await api.get("/products");
+      const { data } = await api.get("/products", {
+        params: {
+          orderBy: filters.orderBy,
+          limit: filters.limit
+        }
+      });
       console.log(data);
       setProducts(data);
     } catch (error) {
@@ -32,7 +36,7 @@ export const Home = () => {
 
   useEffect(() => {
     getProducts();
-  }, [modal.modalShow]);
+  }, [modal.modalShow, filters]);
 
   return (
     <HomeStyle>
