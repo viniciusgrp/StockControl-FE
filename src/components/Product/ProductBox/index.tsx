@@ -32,7 +32,7 @@ export const Product = ({ product }: any) => {
       </div>
       <div className="liDivs">
         <p>Em estoque:</p>
-        <p>{product.quantityStock}</p>
+        <p>{product.quantityStock.toLocaleString("pt-br")}</p>
       </div>
       <div className="liButtons">
         <button

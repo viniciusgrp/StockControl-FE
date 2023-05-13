@@ -13,11 +13,14 @@ import {
   ProductListHeader,
 } from "../../components/Product/ProductList";
 import { useDispatch } from "react-redux";
+import Logo from "../../img/logo.png";
+import { IProduct, IProducts } from "../../components/interfaces";
+import { Pagination } from "../../components/Pagination";
 
 export const Home = () => {
-  const [products, setProducts] = useState<any>();
+  const [products, setProducts] = useState<IProduct[]>();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const modal: IModalReducer = useSelector((state: IStore) => state.modal);
 
@@ -27,15 +30,17 @@ export const Home = () => {
 
   const getProducts = async () => {
     try {
-      const { data } = await api.get("/products", {
+      const { data } = await api.get<IProducts>("/products", {
         params: {
           orderBy: filters.orderBy,
           limit: filters.limit,
-          name: filters.inputSearch
+          name: filters.inputSearch,
+          page: filters.page
         },
       });
       console.log(data);
-      setProducts(data);
+      setProducts(data.products);
+      dispatch({type: "totalOfPages", totalOfPages: data.pages})
     } catch (error) {
       console.log(error);
     }
@@ -43,33 +48,40 @@ export const Home = () => {
 
   useEffect(() => {
     getProducts();
-  }, [modal.modalShow, filters]);
+  }, [modal.modalShow, filters.inputSearch, filters.limit, filters.orderBy, filters.page]);
 
   return (
     <HomeStyle>
       <Header>
-        <h1>StockControl</h1>
-        <button onClick={() => {
-           dispatch({ type: "modalShow", modalShow: true });
-           dispatch({ type: "modalType", modalType: "add" });
-        }}>Adicionar ao estoque</button>
+        <div className="logo">
+          <img src={Logo} alt="" />
+        </div>
+        <button
+          onClick={() => {
+            dispatch({ type: "modalShow", modalShow: true });
+            dispatch({ type: "modalType", modalType: "add" });
+          }}
+        >
+          Adicionar ao estoque
+        </button>
       </Header>
       <Filters />
 
       {products?.length && filters.listStyle === "box" ? (
         <StockBox>
-          {products?.map((product: any) => (
+          {products?.map((product: IProduct) => (
             <Product product={product} />
           ))}
         </StockBox>
       ) : (
         <StockList>
           <ProductListHeader />
-          {products?.map((product: any) => (
+          {products?.map((product: IProduct) => (
             <ProductList product={product} />
           ))}
-        </StockList>
+          </StockList>
       )}
+      <Pagination/>
       {modal.modalShow && <Modal />}
     </HomeStyle>
   );

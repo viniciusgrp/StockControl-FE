@@ -30,6 +30,7 @@ export const Filters = () => {
           <option value="" selected hidden>
             Itens por página
           </option>
+          <option value="4">4 itens por página</option>
           <option value="10">10 itens por página</option>
           <option value="20">20 itens por página</option>
           <option value="30">30 itens por página</option>

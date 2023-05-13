@@ -9,6 +9,7 @@ export const ProductListHeader = () => {
       <p>Nome</p>
       <p>Preço</p>
       <p>Quantidade em estoque</p>
+      <p>Situação</p>
       <p>Editar</p>
       <p>Excluir</p>
     </ProductListStyleHeader>
@@ -26,6 +27,7 @@ export const ProductList = ({ product }: any) => {
           currency: "BRL",
         })}
       </p>
+      <p>{product.quantityStock.toLocaleString("pt-br")}</p>
       <p
         className={
           product.quantityStock >= 31
@@ -35,7 +37,11 @@ export const ProductList = ({ product }: any) => {
             : "critical"
         }
       >
-        {product.quantityStock}
+        {product.quantityStock >= 31
+          ? "OK"
+          : product.quantityStock >= 11
+          ? "ALERTA"
+          : "CRÍTICO"}
       </p>
       <button
         onClick={() => {
@@ -46,11 +52,13 @@ export const ProductList = ({ product }: any) => {
       >
         <AiOutlineEdit />
       </button>
-      <button onClick={() => {
+      <button
+        onClick={() => {
           dispatch({ type: "modalShow", modalShow: true });
           dispatch({ type: "modalType", modalType: "delete" });
           dispatch({ type: "modalId", modalId: product.id });
-        }}>
+        }}
+      >
         <RiDeleteBin2Line />
       </button>
     </ProductListStyle>

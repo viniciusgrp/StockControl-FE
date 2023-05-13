@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
 export const HomeStyle = styled.div`
-    width: 100vw;
+    width: 100%;
+    overflow: hidden;
 `;
 
 export const Header = styled.header`
     width: 100vw;
-    background-color: cyan;
+    background-color: #dcd2f7;
     padding: 8px;
     padding-bottom: 15px;
     display: flex;
@@ -14,15 +15,25 @@ export const Header = styled.header`
     justify-content: center;
     gap: 10px;
 
-    h1 {
+    .logo {
+      max-height: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        max-width: 170px;
+      }
+      h1 {
         font-size: 16px;
+      }
     }
 
     button {
-        background-color: blue;
+        background-color: #961a99;
         border: none;
         border-radius: 8px;
-        padding: 5px 20px;
+        padding: 10px 20px;
         color: white;
         font-weight: 500;
     }
@@ -138,6 +149,7 @@ export const StockList = styled.ul`
   width: 90%;
   max-width: 1000px;
   margin: 20px auto;
+  overflow: auto;
 
   p {
     border: 1px solid black;
