@@ -22,7 +22,7 @@ export const EditModal = ({modalType}: IProps) => {
     if (modalType === 'add') {
       const price = formData.price.replace(",", ".")
       try {
-        const { data } = await api.post("/products", {
+        await api.post("/products", {
           name: formData.name,
           price: Number(price),
           quantityStock: Number(formData.quantityStock)
@@ -36,7 +36,7 @@ export const EditModal = ({modalType}: IProps) => {
       const name = formData.name || null
       const quantityStock = Number(formData.quantityStock) || null
       try {
-        const { data } = await api.patch(`/products/${modal.modalId}`, {
+        await api.patch(`/products/${modal.modalId}`, {
           name,
           price,
           quantityStock
