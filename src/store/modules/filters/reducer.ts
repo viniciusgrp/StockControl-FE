@@ -1,22 +1,28 @@
-export interface IFilters {
+export interface IFiltersReducer {
     orderBy?: string;
     limit?: number;
-    inputSearch?: string;
+  inputSearch?: string;
+  listStyle: string;
 }
 
-const initialState: IFilters = {}
+const initialState: IFiltersReducer = {
+  listStyle: "box"
+}
 
-export const filtersReducer: any = (state:IFilters = initialState, action: any) => {
+export const filtersReducer: any = (state:IFiltersReducer = initialState, action: any) => {
   switch (action.type) {
     case "orderBy":
       const { orderBy } = action
-      return {...state, orderBy}
+      return { ...state, orderBy }
     case "limit":
       const { limit } = action
       return { ...state, limit }
     case "inputSearch":
       const { inputSearch } = action
-      return {...state, inputSearch}
+      return { ...state, inputSearch }
+    case "listStyle":
+      const { listStyle } = action
+      return {...state, listStyle}
     default:
       return state;
   }

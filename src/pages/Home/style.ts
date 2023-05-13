@@ -35,7 +35,7 @@ export const Header = styled.header`
     }
 `;
 
-export const StockList = styled.ul`
+export const StockBox = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,7 +97,7 @@ export const StockList = styled.ul`
     }
 
     .warning {
-      background-color: yellow;
+      background-color: orange;
       color: black;
     }
 
@@ -133,3 +133,28 @@ export const StockList = styled.ul`
     }
   }
 `;
+
+export const StockList = styled.ul`
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+
+  p {
+    border: 1px solid black;
+    padding: 3px;
+  }
+
+  .good {
+      background-color: green;
+    }
+
+    .warning {
+      background-color: orange;
+      color: black;
+    }
+
+    .critical {
+      background-color: red;
+      color: white;
+    }
+`

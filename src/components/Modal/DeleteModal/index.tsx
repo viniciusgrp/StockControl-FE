@@ -2,9 +2,10 @@ import { useDispatch } from "react-redux";
 import { ModalContent } from "./style"
 import { useSelector } from "react-redux";
 import { api } from "../../../services";
+import { IStore } from "../../../store";
 
 export const DeleteModal = () => {
-    const { modalId } = useSelector((state: any) => state.modal)
+    const { modalId } = useSelector((state: IStore) => state.modal)
     const dispatch = useDispatch();
 
     const deleteProduct = async () => {

@@ -20,6 +20,27 @@ margin-top: 10px;
             padding: 5px;
             border-radius: 4px;
         }
+
+        .buttonDiv {
+            display: flex;
+            gap: 10px;
+            
+            .active {
+                background-color: rgba(0,0,244,0.1);
+            }
+            button {
+                border: 1px solid black;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 5px;
+                background-color: transparent;
+                color: blue;
+                font-size: 18px;
+                border-radius: 8px;
+
+            }
+        }
     }
 
     form {
@@ -48,7 +69,7 @@ margin-top: 10px;
 
         .selectsFilter {
             flex-direction: row;
-            max-width: 400px;
+            max-width: 500px;
         }
 
         form {

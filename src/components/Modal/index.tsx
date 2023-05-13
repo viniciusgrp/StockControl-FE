@@ -2,16 +2,17 @@ import { useSelector } from "react-redux";
 import { EditModal } from "./EditModal";
 import { ModalStyle } from "./style";
 import { DeleteModal } from "./DeleteModal";
+import { IStore } from "../../store";
 
 export const Modal = () => {
-    const type = useSelector((state: any) => state.modal);
+    const type = useSelector((state: IStore) => state.modal);
 
     console.log(type)
     
-    if (type.modalType === 'edit') {
+    if (type.modalType === 'edit' || type.modalType === 'add') {
         return (
             <ModalStyle>
-                <EditModal/>
+                <EditModal modalType={type.modalType} />
             </ModalStyle>
         )
     }

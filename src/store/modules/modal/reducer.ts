@@ -1,5 +1,13 @@
+export interface IModalReducer {
+  modalType?: string;
+  modalShow: boolean;
+  modalId?: number;
 
-const initialState = {}
+}
+
+const initialState = {
+  modalShow: false
+}
 
 export const modalReducer: any = (state = initialState, action: any) => {
   switch (action.type) {

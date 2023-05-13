@@ -1,31 +1,38 @@
 import { useEffect, useState } from "react";
 import { api } from "../../services";
-import { Header, HomeStyle, StockList } from "./style";
+import { Header, HomeStyle, StockBox, StockList } from "./style";
 import { Modal } from "../../components/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { Product } from "../../components/Product";
+import { useSelector } from "react-redux";
+import { Product } from "../../components/Product/ProductBox";
 import { Filters } from "../../components/Filters";
-import { IFilters } from "../../store/modules/filters/reducer";
+import { IFiltersReducer } from "../../store/modules/filters/reducer";
+import { IStore } from "../../store";
+import { IModalReducer } from "../../store/modules/modal/reducer";
+import {
+  ProductList,
+  ProductListHeader,
+} from "../../components/Product/ProductList";
+import { useDispatch } from "react-redux";
 
 export const Home = () => {
   const [products, setProducts] = useState<any>();
 
-  const modal = useSelector((state: any) => state.modal);
+  const dispatch = useDispatch()
 
-  const filters: IFilters = useSelector((state: any) => state.filters)
+  const modal: IModalReducer = useSelector((state: IStore) => state.modal);
 
-  useEffect(() => {
-    console.log(filters)
-  },[filters])
-
+  const filters: IFiltersReducer = useSelector(
+    (state: IStore) => state.filters
+  );
 
   const getProducts = async () => {
     try {
       const { data } = await api.get("/products", {
         params: {
           orderBy: filters.orderBy,
-          limit: filters.limit
-        }
+          limit: filters.limit,
+          name: filters.inputSearch
+        },
       });
       console.log(data);
       setProducts(data);
@@ -42,13 +49,27 @@ export const Home = () => {
     <HomeStyle>
       <Header>
         <h1>StockControl</h1>
-        <button>Adicionar ao estoque</button>
+        <button onClick={() => {
+           dispatch({ type: "modalShow", modalShow: true });
+           dispatch({ type: "modalType", modalType: "add" });
+        }}>Adicionar ao estoque</button>
       </Header>
-      <Filters/>
-      <StockList>
-        {products?.length &&
-          products.map((product: any) => <Product product={product} />)}
-      </StockList>
+      <Filters />
+
+      {products?.length && filters.listStyle === "box" ? (
+        <StockBox>
+          {products?.map((product: any) => (
+            <Product product={product} />
+          ))}
+        </StockBox>
+      ) : (
+        <StockList>
+          <ProductListHeader />
+          {products?.map((product: any) => (
+            <ProductList product={product} />
+          ))}
+        </StockList>
+      )}
       {modal.modalShow && <Modal />}
     </HomeStyle>
   );
