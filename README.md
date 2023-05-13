@@ -6,6 +6,11 @@ Tecnologias utilizadas:
 
 React, Redux, TypeScript, Styled-Components, Axios, React-router-dom, react-hook-form, react-icons, Vite.
 
+Link para acessar o projeto sem necessidade de rodar localmente:
+
+Deploy:
+https://stock-control-fe.vercel.app/
+
 Para rodar o front end localmente siga os seguintes passos:
 
 1 - Caso queira rodar o Back End também localmente, baixe, instale e configure-o, seguindo os passos presentes no README do seguinte repositório:
