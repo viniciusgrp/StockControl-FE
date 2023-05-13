@@ -1,5 +1,3 @@
 import { styled } from "styled-components";
 
-export const ProductStyle = styled.li`
-    
-`
+export const ProductStyle = styled.li``;

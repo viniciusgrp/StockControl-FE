@@ -35,12 +35,12 @@ export const Home = () => {
           orderBy: filters.orderBy,
           limit: filters.limit,
           name: filters.inputSearch,
-          page: filters.page
+          page: filters.page,
         },
       });
       console.log(data);
       setProducts(data.products);
-      dispatch({type: "totalOfPages", totalOfPages: data.pages})
+      dispatch({ type: "totalOfPages", totalOfPages: data.pages });
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +48,13 @@ export const Home = () => {
 
   useEffect(() => {
     getProducts();
-  }, [modal.modalShow, filters.inputSearch, filters.limit, filters.orderBy, filters.page]);
+  }, [
+    modal.modalShow,
+    filters.inputSearch,
+    filters.limit,
+    filters.orderBy,
+    filters.page,
+  ]);
 
   return (
     <HomeStyle>
@@ -79,9 +85,9 @@ export const Home = () => {
           {products?.map((product: IProduct) => (
             <ProductList product={product} />
           ))}
-          </StockList>
+        </StockList>
       )}
-      <Pagination/>
+      <Pagination />
       {modal.modalShow && <Modal />}
     </HomeStyle>
   );

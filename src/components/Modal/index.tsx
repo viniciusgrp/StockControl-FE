@@ -5,25 +5,25 @@ import { DeleteModal } from "./DeleteModal";
 import { IStore } from "../../store";
 
 export const Modal = () => {
-    const type = useSelector((state: IStore) => state.modal);
+  const type = useSelector((state: IStore) => state.modal);
 
-    console.log(type)
-    
-    if (type.modalType === 'edit' || type.modalType === 'add') {
-        return (
-            <ModalStyle>
-                <EditModal modalType={type.modalType} />
-            </ModalStyle>
-        )
-    }
+  console.log(type);
 
-    if (type.modalType === 'delete') {
-        return (
-            <ModalStyle>
-                <DeleteModal/>
-            </ModalStyle>
-        )
-    }
+  if (type.modalType === "edit" || type.modalType === "add") {
+    return (
+      <ModalStyle>
+        <EditModal modalType={type.modalType} />
+      </ModalStyle>
+    );
+  }
 
-    return <></>
-}
+  if (type.modalType === "delete") {
+    return (
+      <ModalStyle>
+        <DeleteModal />
+      </ModalStyle>
+    );
+  }
+
+  return <></>;
+};

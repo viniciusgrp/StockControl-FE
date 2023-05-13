@@ -15,4 +15,4 @@ export const Global = createGlobalStyle`
     button {
         cursor: pointer;
     }
-`
+`;

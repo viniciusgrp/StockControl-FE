@@ -10,47 +10,46 @@ interface IProps {
   modalType: string;
 }
 
-export const EditModal = ({modalType}: IProps) => {
+export const EditModal = ({ modalType }: IProps) => {
   const modal = useSelector((state: IStore) => state.modal);
   const [infos, setInfos] = useState<any>();
-  
-  const { register, handleSubmit, setValue } = useForm()
-  
+
+  const { register, handleSubmit, setValue } = useForm();
+
   const dispatch = useDispatch();
 
   const onSubmit = async (formData: any) => {
-    if (modalType === 'add') {
-      const price = formData.price.replace(",", ".")
+    if (modalType === "add") {
+      const price = formData.price.replace(",", ".");
       try {
         await api.post("/products", {
           name: formData.name,
           price: Number(price),
-          quantityStock: Number(formData.quantityStock)
-        })
-        dispatch({type: "modalShow", modalShow: false})
+          quantityStock: Number(formData.quantityStock),
+        });
+        dispatch({ type: "modalShow", modalShow: false });
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    } else if (modalType === 'edit') {
-      const price = formData.price || null
-      const name = formData.name || null
-      const quantityStock = Number(formData.quantityStock) || null
+    } else if (modalType === "edit") {
+      const price = formData.price || null;
+      const name = formData.name || null;
+      const quantityStock = Number(formData.quantityStock) || null;
       try {
         await api.patch(`/products/${modal.modalId}`, {
           name,
           price,
-          quantityStock
-        })
-        dispatch({type: "modalShow", modalShow: false})
+          quantityStock,
+        });
+        dispatch({ type: "modalShow", modalShow: false });
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
-  }
-
+  };
 
   const setInitialValues = () => {
-    if (infos?.name && modalType === 'edit') {
+    if (infos?.name && modalType === "edit") {
       setValue("name", infos.name);
       setValue("price", infos.price);
       setValue("quantityStock", infos.quantityStock);
@@ -71,13 +70,13 @@ export const EditModal = ({modalType}: IProps) => {
   };
 
   useEffect(() => {
-    if (modalType === 'edit') getInfos();
+    if (modalType === "edit") getInfos();
   }, []);
 
   return (
     <ModalContent className="modalContent">
       <header>
-        <span>{modalType === 'edit' ? 'Editar' : "Adicionar ao estoque"}</span>
+        <span>{modalType === "edit" ? "Editar" : "Adicionar ao estoque"}</span>
         <button
           onClick={() => dispatch({ type: "modalShow", modalShow: false })}
         >
@@ -91,13 +90,30 @@ export const EditModal = ({modalType}: IProps) => {
         </div>
         <div className="inputForm">
           <label htmlFor="price">Preço</label>
-          <input type='number' required min={0} step={0.01} {...register("price")} id="price" />
+          <input
+            type="number"
+            required
+            min={0}
+            step={0.01}
+            {...register("price")}
+            id="price"
+          />
         </div>
         <div className="inputForm">
           <label htmlFor="quantity">Quantidade</label>
-          <input type="number" required min={0} {...register("quantityStock")} id="quantity" />
+          <input
+            type="number"
+            required
+            min={0}
+            {...register("quantityStock")}
+            id="quantity"
+          />
         </div>
-        {modalType === 'edit' ? <button type="submit">Editar</button> : <button type="submit" >Adicionar ao estoque</button>}
+        {modalType === "edit" ? (
+          <button type="submit">Editar</button>
+        ) : (
+          <button type="submit">Adicionar ao estoque</button>
+        )}
       </form>
     </ModalContent>
   );
