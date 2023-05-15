@@ -11,6 +11,9 @@ Link para acessar o projeto sem necessidade de rodar localmente:
 Deploy:
 https://stock-control-fe.vercel.app/
 
+ATENÇÃO:
+Por conta do deploy do back end ser o modelo grátis, ao abrir o site provavelmente a API estará suspensa por falta de atividade, mas basta aguardar alguns segundos e ir atualizando a página que logo aparecerá os itens do estoque.
+
 Para rodar o front end localmente siga os seguintes passos:
 
 1 - Caso queira rodar o Back End também localmente, baixe, instale e configure-o, seguindo os passos presentes no README do seguinte repositório:
